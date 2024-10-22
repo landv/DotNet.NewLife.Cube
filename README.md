@@ -1,12 +1,17 @@
 # 魔方从零开始VS2022+NET8+MVC
+
+新生命官网教程地址：[https://newlifex.com/cube/cube_zero_start_vs2022_net8_mvc](https://newlifex.com/cube/cube_zero_start_vs2022_net8_mvc)
+
 本教程中的代码（拉取后直接运行即可）：[https://github.com/landv/DotNet.NewLife.Cube](https://github.com/landv/DotNet.NewLife.Cube)
 
 ## 初始化
+
 + 魔方源码库地址：[https://github.com/NewLifeX/NewLife.Cube](https://github.com/NewLifeX/NewLife.Cube)
 + XCode源码库地址： [https://github.com/NewLifeX/NewLife.XCode](https://github.com/NewLifeX/NewLife.XCode)  （需要使用xcodetool.exe 这个工具来动态生成代码以及自动建表）
 + IDE：VS 2022社区版（中文版） DotNet Core 版本为NET8
 
 ## 创建项目
+
 + <font style="color:rgb(64, 64, 64);">打开VS，依次点击工具栏文件按钮->新建->项目，选择ASP.NET Core Web 应用(模型-视图-控制器） </font>
 
 ![](https://cdn.nlark.com/yuque/0/2024/png/638116/1729581477968-4dd81864-dfe5-42c1-a918-c7750f35dbbe.png)
@@ -22,11 +27,13 @@
 ![](https://cdn.nlark.com/yuque/0/2024/png/638116/1729581778079-f7be6e24-4525-4ee6-b48f-810065d7d6ad.png)
 
 ## <font style="color:rgb(64, 64, 64);">安装并应用NewLife.Cube.Core</font>
+
 + <font style="color:rgb(64, 64, 64);">右键点击项目中依赖项->点击管理NuGet程序包->搜索框输入"</font>**<font style="color:rgb(64, 64, 64);">NewLife.Cube.Core</font>**<font style="color:rgb(64, 64, 64);">"，选中搜索结果，点击安装。</font>
 
 ![](https://cdn.nlark.com/yuque/0/2024/png/638116/1729584683639-2f7b430a-263f-4c4f-9b57-e2a248d9f08a.png)
 
 ###### 修改Program.cs
+
 **注：**_使用皮肤需要在nuget下载安装对应的皮肤后，在后台系__<font style="background-color:#FBDE28;">统设置》魔方设置》界面设置》主体样式</font>__里面可以进行切换。_
 
 _这里会默认进入Admin路由，默认创建的MVC框架的内容不会变，路由没有进行禁止。_
@@ -92,7 +99,9 @@ app.Run();
 ```
 
 ## <font style="color:rgb(64, 64, 64);">添加自己的页面</font>
+
 ### <font style="color:rgb(64, 64, 64);">新建区域</font>
+
 + <font style="color:rgb(64, 64, 64);">首先新建区域</font><font style="color:rgb(130, 0, 20);background-color:rgb(255, 232, 230);">School</font><font style="color:rgb(64, 64, 64);">，手动创建文件夹</font><font style="color:rgb(130, 0, 20);background-color:rgb(255, 232, 230);">Areas/School</font><font style="color:rgb(64, 64, 64);">，在此文件夹创建区域类</font><font style="color:rgb(130, 0, 20);background-color:rgb(255, 232, 230);">SchoolArea</font><font style="color:rgb(64, 64, 64);">，填入以下内容。</font>
 
 ```csharp
@@ -113,6 +122,7 @@ namespace DotNet.NewLife.Cube.Areas.School
 ```
 
 ### <font style="color:rgb(64, 64, 64);">新建实体</font>
+
 <font style="color:rgb(64, 64, 64);">新建数据库实体类。新建文件夹</font><font style="background-color:#FBDE28;">Areas/School/Models</font><font style="color:rgb(64, 64, 64);">，将实体类放在此文件夹。</font>
 
 <font style="color:rgb(64, 64, 64);">使用</font><font style="color:rgb(64, 64, 64);background-color:#FBDE28;">XCode</font>
@@ -250,6 +260,7 @@ Model.xml 修改后的内容
 ```
 
 ### <font style="color:rgb(64, 64, 64);">新建控制器</font>
+
 + <font style="color:rgb(64, 64, 64);">新建文件夹</font><font style="color:rgb(130, 0, 20);background-color:rgb(255, 232, 230);">Areas/School/Controllers</font><font style="color:rgb(64, 64, 64);">，新建ClassController、StudentController两个控制器，分别填入以下内容。</font>
 
 ```csharp
@@ -349,6 +360,7 @@ namespace DotNet.NewLife.Cube.Areas.School.Controllers
 ```
 
 ### <font style="color:rgb(64, 64, 64);">页面修改</font>
+
 + <font style="color:rgb(64, 64, 64);">此时运行，一切正常，可看到如下页面。</font>
 
 ![](https://cdn.nlark.com/yuque/0/2024/png/638116/1729586376895-bd18e6f6-e533-44de-99db-b4dc975ba17a.png)
@@ -417,6 +429,7 @@ namespace DotNet.NewLife.Cube.Areas.School.Controllers
 ```
 
 ## XCode工具编译和使用
+
 ![](https://cdn.nlark.com/yuque/0/2024/png/638116/1729580927549-cf7d221a-c4ba-4553-a7aa-65ddef0611d6.png)
 
 ![](https://cdn.nlark.com/yuque/0/2024/png/638116/1729580952882-b7749255-9aea-46ca-9798-4ed90ec108b7.png)
@@ -437,21 +450,23 @@ Execute(dotnet tool install xcodetool -g)
 **注意：**_有的时候电脑会间歇性抽风，emm这是一个很蛋疼的问题，虽然重启会好。这里再提供一个解决方法将XCodeTool.exe 所在目录添加到系统path环境里面即可。_
 
 ## 关于数据库相关
+
 ### 关于数据库连接库
+
 如果框架没有自动拉取到数据库依赖DLL可以使用nuget的方式：
 
 会出现这样的情况
 
 ![](https://cdn.nlark.com/yuque/0/2024/png/638116/1729580695566-465e9364-e8d2-4b45-9ade-38b06f7cda4f.png)
 
-
-
 在<font style="background-color:#FBDE28;">nuget </font>上搜索 <font style="background-color:#FBDE28;">Xcode.   </font> 进行手动安装
 
 ![](https://cdn.nlark.com/yuque/0/2024/png/638116/1729580616452-e484c406-087c-42d0-a653-3f591dd035e2.png)
 
 ### 关于数据库字段
+
 ###### appsettings.json相关
+
 ```json
 {
   "Logging": {
@@ -484,11 +499,10 @@ Membership和Log 是框架需要的，如果这里不进行配置数据库连接
 
 ![](https://cdn.nlark.com/yuque/0/2024/png/638116/1729587607691-0ed4fd3a-9a9f-4b78-a051-3e59a3071a08.png)
 
-
-
 ###### 数据库连接字符串示例
+
 ```json
-  "ConnectionStrings": {
+"ConnectionStrings": {
     "mssql": "Data Source=192.168.1.106;Initial Catalog=peipei;user=sa;password=landv;provider=mssql",
     "mssql2": "Data Source=.;Initial Catalog=master;Integrated Security=True;provider=mssql",
     "Oracle": "Data Source=Tcp://127.0.0.1/ORCL;User Id=scott;Password=tiger;provider=oracle",
