@@ -1,5 +1,8 @@
 # 魔方从零开始VS2022+NET8+MVC
 
+* [魔方从零开始VS2022+NET8+MVC[202401]](https://newlifex.com/cube/cube_zero_start_vs2022_net8_mvc)
+* [魔方从零开始VS2022+NET8+MVC[202402]](https://newlifex.com/cube/cube_zero_start_vs2022_net8_mvc_02)
+
 新生命官网教程地址：[https://newlifex.com/cube/cube_zero_start_vs2022_net8_mvc](https://newlifex.com/cube/cube_zero_start_vs2022_net8_mvc)
 
 本教程中的代码（拉取后直接运行即可）：[https://github.com/landv/DotNet.NewLife.Cube](https://github.com/landv/DotNet.NewLife.Cube)
@@ -513,4 +516,443 @@ Membership和Log 是框架需要的，如果这里不进行配置数据库连接
     "Membership": "Data Source=Membership.db;provider=sqlite"
   }
 ```
+
++ [魔方从零开始VS2022+NET8+MVC[202401]](https://newlifex.com/cube/cube_zero_start_vs2022_net8_mvc)
+
+# 魔方从零开始VS2022+NET8+MVC[202402]
+
+## 自定义页面
+
+### 替换框架页面
+
+#### **<font style="color:rgb(38, 38, 38);">自定义启动页</font>**
+
+魔方启动打开的第一个页面，这个页面会一闪而过。
+
++ <font style="color:rgb(38, 38, 38);">可能有人看着不爽，那么自定义有两种方法。第一是视图覆盖，第二是默认路由替换。</font>
+
+![](https://cdn.nlark.com/yuque/0/2024/png/638116/1729643755457-f99d1035-ae52-44eb-811e-8cb7ad71b83a.png)
+
+##### <font style="color:rgb(51, 51, 51);">视图覆盖</font>
+
++ <font style="color:rgb(38, 38, 38);">视图位于</font><font style="color:rgb(130, 0, 20);background-color:rgb(255, 232, 230);">Views/CubeHome/Index.cshtml</font><font style="color:rgb(38, 38, 38);">，换成自己的页面即可。</font>
+
+修改后的效果如下：
+
+![](https://cdn.nlark.com/yuque/0/2024/png/638116/1729644150445-f622f929-e0ef-4419-a281-537220fa1a82.png)
+
+框架页面源码
+
+[https://github.com/NewLifeX/NewLife.Cube/tree/master/NewLife.CubeNC/Views](https://github.com/NewLifeX/NewLife.Cube/tree/master/NewLife.CubeNC/Views)
+
+![](https://cdn.nlark.com/yuque/0/2024/png/638116/1729644427630-e05096ca-9475-4c90-acf1-4e3cea4d2e13.png)
+
+比如现在要修改你们讨厌的启动页面
+
+下面是源文件
+
+[https://raw.githubusercontent.com/NewLifeX/NewLife.Cube/refs/heads/master/NewLife.CubeNC/Views/CubeHome/Index.cshtml](https://raw.githubusercontent.com/NewLifeX/NewLife.Cube/refs/heads/master/NewLife.CubeNC/Views/CubeHome/Index.cshtml)
+
+[https://github.com/NewLifeX/NewLife.Cube/blob/master/NewLife.CubeNC/Views/CubeHome/Index.cshtml](https://github.com/NewLifeX/NewLife.Cube/blob/master/NewLife.CubeNC/Views/CubeHome/Index.cshtml)
+
+这个路径是关键点。
+
+<font style="background-color:#FBDE28;">Views/CubeHome/Index.cshtml</font>
+
+![](https://cdn.nlark.com/yuque/0/2024/png/638116/1729644610840-caebe89b-2bac-4c86-8f5d-3c03a22ca7d8.png)
+
+按照这个路径创建文件,并在<font style="background-color:#FBDE28;">CubeHome</font>文件夹上右键，添加视图。
+
+![](https://cdn.nlark.com/yuque/0/2024/png/638116/1729644702356-db8d4d60-cb7d-47d1-ad13-cf6c36021b9f.png)
+
+添加Razor视图-空
+
+![](https://cdn.nlark.com/yuque/0/2024/png/638116/1729644785452-75587f89-41fb-46f7-9428-5d3ce3b3806a.png)
+
+默认Index.cshtml名称即可
+
+![](https://cdn.nlark.com/yuque/0/2024/png/638116/1729644804828-38476220-c132-44da-a9fb-f55e44d79c86.png)
+
+然后从原始文件位置复制粘贴到此处。[https://github.com/NewLifeX/NewLife.Cube/blob/master/NewLife.CubeNC/Views/CubeHome/Index.cshtml](https://github.com/NewLifeX/NewLife.Cube/blob/master/NewLife.CubeNC/Views/CubeHome/Index.cshtml)
+
+![](https://cdn.nlark.com/yuque/0/2024/png/638116/1729644875728-98250952-3d5b-48c4-bba4-2ec7eb4d5b7c.png)
+
+![](https://cdn.nlark.com/yuque/0/2024/png/638116/1729644914222-24d7e614-4211-4a3c-9379-035204ce9ca4.png)
+
+```csharp
+@using NewLife;
+@using NewLife.Common;
+@using NewLife.Web
+@{
+    Layout = null;
+    var page = "/";
+    page = page.EnsureEnd("/") + "Admin";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@SysConfig.Current.DisplayName</title>
+    <meta http-equiv="refresh" content="0;url=@(page)">
+</head>
+<body>
+    <div>
+        <h1>@SysConfig.Current.DisplayName</h1>
+        <h3>xxxxxxxxxxxxxxxxxxxxxx正在启动系统……</h3>
+        @SysConfig.Current.Company
+    </div>
+</body>
+@await Html.PartialAsync("_Footer")
+    </html>
+```
+
+![](https://cdn.nlark.com/yuque/0/2024/png/638116/1729644935699-4946aa3a-ba43-4ac7-a2c8-3edfd585ca91.png)
+
+需要清理解决方案，重新运行即可看到（会一闪而过）
+
+![](https://cdn.nlark.com/yuque/0/2024/png/638116/1729644150445-f622f929-e0ef-4419-a281-537220fa1a82.png?x-oss-process=image%2Fformat%2Cwebp)
+
+**注：**_其他页面修改方法雷同_
+
+#### 自定义登录页面
+
+与自定义启动页面类似
+
+[https://github.com/NewLifeX/NewLife.Cube/blob/master/NewLife.CubeNC/Areas/Admin/Views/User/Login.cshtml](https://github.com/NewLifeX/NewLife.Cube/blob/master/NewLife.CubeNC/Areas/Admin/Views/User/Login.cshtml)
+
+[https://github.com/NewLifeX/NewLife.Cube/blob/master/NewLife.CubeNC/Areas/Admin/Views/User/Login.cshtml](https://github.com/NewLifeX/NewLife.Cube/blob/master/NewLife.CubeNC/Areas/Admin/Views/User/Login.cshtml)
+
+看上面的路径<font style="background-color:#FBDE28;">/Areas/Admin/Views/User/Login.cshtml </font> 一样在咱们自己的项目里面创建这个路径和文件。
+
+![](https://cdn.nlark.com/yuque/0/2024/png/638116/1729645659299-5fadcf73-d634-457f-acaa-4649eda73ce1.png)
+
+注意差异点
+
+![](https://cdn.nlark.com/yuque/0/2024/png/638116/1729645807448-7577fc26-0222-4f01-8e8e-9da8989db39e.png)
+
+```csharp
+@using NewLife.Common;
+@{
+    Layout = null;
+    ViewBag.Title = "登录";
+}
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+
+    <title>@ViewBag.Title - @SysConfig.Current.DisplayName</title>
+    <link href="https://cdn.bootcdn.net/ajax/libs/element-ui/2.13.2/theme-chalk/index.css" rel="stylesheet">
+    <!-- Login -->
+    <style scoped>
+        .login-logo {
+            text-align: center;
+            font-size: 130px;
+            color: #4ca6ff;
+            margin-top: 50px;
+        }
+
+        .cube-login {
+            background: #fff;
+            padding-bottom: 0;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+            .cube-login .heading {
+                display: block;
+                font-size: 24px;
+                font-weight: 700;
+                padding: 5px 0;
+                margin-bottom: 20px;
+                text-align: center;
+            }
+
+            .cube-login input {
+                border-radius: 20px;
+                box-shadow: none;
+                padding: 0 20px 0 45px;
+                height: 40px;
+                transition: all 0.3s ease 0s;
+            }
+
+            .cube-login .text {
+                float: left;
+                margin-left: 7px;
+                line-height: 20px;
+                padding-top: 5px;
+                text-transform: capitalize;
+            }
+
+            .cube-login a {
+                position: absolute;
+                top: 12px;
+                right: 0px;
+                font-size: 17px;
+                color: #c8c8c8;
+                transition: all 0.5s ease 0s;
+                color: #4ca6ff;
+            }
+
+        .btn {
+            float: right;
+            font-size: 14px;
+            color: #fff;
+            background: #00b4ef;
+            /* border-radius: 30px; */
+            border-radius: 4px;
+            padding: 8px 50px;
+            border: none;
+            text-transform: capitalize;
+            transition: all 0.5s ease 0s;
+            margin: -25px 0 15px 0;
+            width: 100%;
+        }
+
+        .text-primary {
+            color: #337ab7;
+        }
+
+        label {
+            display: inline-block;
+            max-width: 100%;
+            margin-bottom: 5px;
+            font-weight: 700;
+        }
+    </style>
+    <!-- Login3 -->
+    <style scoped>
+        .text-center {
+            text-align: center;
+        }
+
+        p.login3 {
+            font-size: 22px;
+            position: relative;
+            width: 100%;
+            color: #333;
+        }
+
+            p.login3 span {
+                height: 1px;
+                position: absolute;
+                background-color: #928f8f;
+                width: 35%;
+                top: 50%;
+            }
+
+                p.login3 span.right {
+                    right: 65%;
+                }
+
+                p.login3 span.left {
+                    left: 65%;
+                }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <el-row type="flex"
+                justify="center">
+            <el-col :span="6">
+                <!-- Login -->
+                <div>
+                    <!-- Logo-->
+                    <el-row>
+                        <el-col :span="24"
+                                class="login-logo">
+                            <i class="el-icon-cloudy"></i>
+                        </el-col>
+                    </el-row>
+                    <template v-if="setting.AllowLogin">
+                        <el-form :model="loginForm"
+                                 class="cube-login">
+                            <!-- 登录-->
+                            <span class="heading text-primary">{{ sysConfig.DisplayName }} 登录</span>
+                            <el-form-item label="">
+                                <el-input v-model="loginForm.username"
+                                          placeholder="用户名 / 邮箱"
+                                          prefix-icon="el-icon-user"
+                                          class="form-control">
+                                </el-input>
+                            </el-form-item>
+
+                            <el-form-item label="">
+                                <el-input v-model="loginForm.password"
+                                          placeholder="密码"
+                                          prefix-icon="el-icon-lock"
+                                          class="form-control"
+                                          show-password>
+                                </el-input>
+                            </el-form-item>
+                            <el-form-item label="">
+                                <el-checkbox class="text text-primary"
+                                             v-model="loginForm.remember">记住我</el-checkbox>
+
+                                <template v-if="setting.AllowRegister">
+                                    <div style="display: inline-block; margin-top: 5px; float: right;">
+                                        <a href="#Register"
+                                           data-toggle="tab"
+                                           style="margin-left: auto; margin-right: auto; position: static; font-size: 15px; margin-top: 5px;">
+                                            <span>我要注册</span>
+                                        </a>
+                                    </div>
+                                </template>
+                            </el-form-item>
+                        </el-form>
+
+                        <button class="btn"
+                                @@click="login">
+                            登录
+                        </button>
+                    </template>
+                </div>
+                <!-- Login3 -->
+                <div v-if="setting.AutoRegister && ms.length > 0">
+                    <el-row>
+                        <el-col :span="24" class="text-center">
+                            <p class="login3">
+                                <span class="left"></span>
+                                第三方登录
+                                <span class="right"></span>
+                            </p>
+                            <el-row>
+                                <el-col :sm="24">
+                                    <template v-for="(mi, i) in ms">
+                                        <a :key="i" :href="getUrl(mi)">
+                                            {{ mi.Name }}
+                                        </a>
+                                    </template>
+                                </el-col>
+                            </el-row>
+                        </el-col>
+                    </el-row>
+                </div>
+            </el-col>
+        </el-row>
+    </div>
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.11/vue.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/element-ui/2.13.2/index.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.19.2/axios.min.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data() {
+                return {
+                    loginForm: {
+                        username: null,
+                        password: null,
+                        remember: true
+                    },
+                    sysConfig: {
+                        DisplayName: "魔方xxxxx平台"
+                    },
+                    setting: {
+                        AllowLogin: true,
+                        AllowRegister: true,
+                        AutoRegister: true
+                    },
+                    ms: [
+                        {
+                            Name: "NewLife"
+                        }
+                    ],
+                    dic: {
+                        NewLife: "新生命",
+                        Baidu: "百度",
+                        Weixin: "微信",
+                        Taobao: "淘宝",
+                        Ding: "钉钉"
+                    },
+                    returnUrl: null
+                };
+            },
+            computed: {
+                request() {
+                    const service = axios.create({
+                        timeout: 50000
+                    });
+
+                    // 响应拦截
+                    service.interceptors.response.use(
+                        response => {
+                            const data = response.data;
+                            if (data.code === 500) {
+                                alert(data.message);
+                                return Promise.reject(data.message);
+                            }
+                            return data;
+                        },
+                        error => {
+                            console.log('err' + error)
+                            return Promise.reject(error);
+                        }
+                    );
+
+                    return service;
+                }
+            },
+            methods: {
+                login() {
+                    let vm = this;
+                    vm.loginByUsernameAsync(vm.loginForm)
+                        .then(() => {
+                            let href = "/Admin";
+                            let r = vm.getQueryString("r");
+                            if (r != null) {
+                                href = r;
+                            }
+                            location.href = href;
+                        })
+                        .catch(() => { });
+                },
+                getUrl(mi) {
+                    let vm = this;
+                    var url = "/Sso/Login?name=" + mi.Name;
+                    if (vm.returnUrl != null) {
+                        url += "&r=" + vm.returnUrl;
+                    }
+                    return url;
+                },
+                getName(mi) {
+                    let vm = this;
+                    let nickName = vm.dic[mi.Name];
+                    if (nickName == null) {
+                        nickName = mi.Name;
+                    }
+                    return nickName;
+                },
+
+                loginByUsernameAsync(userInfo) {
+                    let vm = this;
+                    const data = {
+                        username: userInfo.username,
+                        password: userInfo.password,
+                        remember: userInfo.remember
+                    };
+
+                    return vm.request({
+                        url: "/Admin/User/Login",
+                        method: "post",
+                        params: data
+                    });
+                },
+                getQueryString(name) {
+                    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+                    var r = window.location.search.substr(1).match(reg);
+                    if (r != null) return unescape(r[2]); return null;
+                }
+            }
+        })
+    </script>
+</body>
+</html>
+```
+
+
 
